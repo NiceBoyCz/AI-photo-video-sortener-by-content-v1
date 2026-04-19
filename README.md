@@ -1,67 +1,67 @@
-# 🎬 Media Organizer – Detekce, Třídění a Editace Médií
+# 🎬 Media Organizer – Detection, Sorting, and Media Editing
 
-Automatický nástroj, který pomocí AI detekuje objekty ve fotkách a videích, třídí je do složek podle obsahu a upravuje videa (odstraňuje statické scény a tmavé záběry).
-
----
-
-## 📋 Obsah
-
-- ✨ Funkce  
-- 🔧 Požadavky  
-- 📦 Instalace  
-- 🚀 Použití  
-- 📁 Struktura výstupu  
-- 🐛 Řešení problémů  
-- ⚙️ Přizpůsobení  
-- 📄 Licence  
+An automated tool that uses AI to detect objects in photos and videos, sorts them into folders based on content, and edits videos (removes static scenes and dark shots).
 
 ---
 
-## ✨ Funkce
+## 📋 Contents
 
-- Detekce objektů (lidé, zvířata, auta, nábytek, elektronika…)
-- Automatické třídění médií do kategorií
-- Kontrola kvality (rozmazání, tmavé snímky)
-- Editace videí (odstranění statických scén)
-- Zachování originálních souborů
-- Detailní JSON log detekcí
-- Plně lokální zpracování (žádný cloud)
-- Optimalizace pro macOS (Apple Silicon / Intel)
+- ✨ Features  
+- 🔧 Requirements  
+- 📦 Installation  
+- 🚀 Usage  
+- 📁 Output Structure  
+- 🐛 Troubleshooting  
+- ⚙️ Customization  
+- 📄 License  
 
 ---
 
-## 🔧 Požadavky
+## ✨ Features
 
-- Python 3.8+ (doporučeno 3.10+)
+- Object detection (people, animals, cars, furniture, electronics…)
+- Automatic media sorting into categories
+- Quality checking (blur, dark frames)
+- Video editing (removal of static scenes)
+- Keeps original files intact
+- Detailed JSON detection logs
+- Fully local processing (no cloud)
+- Optimized for macOS (Apple Silicon / Intel)
+
+---
+
+## 🔧 Requirements
+
+- Python 3.8+ (recommended 3.10+)
 - Linux/macOS + Homebrew
-- ~2 GB volného místa (YOLO model)
-- vstupní fotky a videa
+- ~2 GB free space (YOLO model)
+- Input photos and videos
 
 ---
 
-## 📦 Instalace
+## 📦 Installation
 
-### 1) Stažení projektu
+### 1) Clone project
 
 ```bash
-git clone <tvůj-repo>
+git clone <your-repo>
 cd media_organizer_project
 ```
 
-### 2) Vytvoření a aktivace venv
+### 2) Create virtual environment
 
 ```bash
 python -m venv myvenv
-source /myvenv/bin/activate
+source myvenv/bin/activate
 ```
 
-### 3) FFmpeg
+### 3) Install FFmpeg
 
 ```bash
 brew install ffmpeg
 ```
 
-### 4) Python knihovny
+### 4) Install Python dependencies
 
 ```bash
 pip3 install -r requirements.txt
@@ -69,15 +69,15 @@ pip3 install -r requirements.txt
 
 ---
 
-## 🚀 Použití
+## 🚀 Usage
 
 ```bash
 python3 main.py
 ```
 
-Vytvoří se:
+Output structure:
 
-```
+```bash
 ~/Documents/media_organizer/
 ├── input/
 ├── output_original/
@@ -85,13 +85,13 @@ Vytvoří se:
 └── .cache/
 ```
 
-👉 Vlož soubory do `input/` a spusť program.
+👉 Put your files into `input/` and run the script.
 
 ---
 
-## 📁 Struktura výstupu
+## 📁 Output Structure
 
-```
+```bash
 output_original/
 ├── people/
 ├── animals/
@@ -104,7 +104,7 @@ output_original/
 └── rejected_bad_quality/
 ```
 
-```
+```bash
 output_edited/
 ├── people/
 ├── animals/
@@ -112,36 +112,38 @@ output_edited/
 └── ...
 ```
 
-## 🐛 Řešení problémů
+---
 
-### Nelalezená python knihovna nebo závislost
+## 🐛 Troubleshooting
+
+Missing dependency:
 ```bash
-pip install [název modulu/závislosti]
+pip install [module name]
 ```
 
-### Missing modul
+Common packages:
 ```bash
 pip3 install ultralytics opencv-python pillow numpy torch tqdm
 ```
 
-### ffmpeg
+FFmpeg:
 ```bash
 brew install ffmpeg
 ```
 
-### input složka
+Create input folder:
 ```bash
 mkdir -p ~/Documents/media_organizer/input
 ```
 
-### YOLO model
+YOLO test:
 ```bash
 python3 -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
 ```
 
 ---
 
-## ⚙️ Přizpůsobení
+## ⚙️ Customization
 
 ### config.py
 
@@ -154,7 +156,7 @@ QUALITY_THRESHOLDS = {
 }
 ```
 
-### Formáty
+### Supported formats
 
 ```python
 SUPPORTED_IMAGES = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
@@ -169,47 +171,36 @@ CONFIDENCE_THRESHOLD = 0.5
 
 ---
 
-## 🎓 Jak to funguje
+## 🎓 How it works
 
-1. Načte YOLO model  
-2. Projde `input/` složku  
-3. Detekuje objekty ve fotkách  
-4. Analyzuje videa (pohyb + scény)  
-5. Třídí do kategorií  
-6. Vytvoří upravená videa  
-7. Uloží JSON log  
-
----
-
-## 📊 Příklad logu
-
-```json
-{
-  "foto.jpg": {
-    "type": "image",
-    "category": "people",
-    "detections": {
-      "person": 3
-    }
-  }
-}
-```
+1. Loads YOLO model  
+2. Scans input folder  
+3. Detects objects in images  
+4. Analyzes videos (motion + scenes)  
+5. Sorts into categories  
+6. Creates edited videos  
+7. Saves JSON logs  
 
 ---
 
-## 🔐 Soukromí
+## 🔐 Privacy
 
-- žádný cloud  
-- žádné odesílání dat  
-- vše běží lokálně  
+- no cloud  
+- no data upload  
+- everything runs locally  
 
+---
 
-## 🚀 Budoucí verze
+## 🚀 Future versions
 
 - Web UI  
-- GPU akcelerace  
+- GPU acceleration  
 - Duplicate detection  
-- Komprese videí  
-- Vlastní AI kategorie
+- Video compression  
+- Custom AI categories  
 
-## Pokud jsou jakékoli problémy nebo používate jakoukoli jinou Linux distribuci na které to nefunguje, napište do Issues.
+---
+
+## 🧠 Issues
+
+If something doesn’t work, open an Issue in the repository.
